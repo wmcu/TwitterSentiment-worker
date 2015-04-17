@@ -1,6 +1,3 @@
-Flask==0.10.1
-Werkzeug==0.9.4
 boto
-itsdangerous==0.23
-wsgiref==0.1.2
+wsgiref
 requests
