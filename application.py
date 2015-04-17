@@ -3,11 +3,11 @@ import boto.sns
 import logging
 import logging.handlers
 import json
-from alchemyapi import AlchemyAPI
+from sentiment import SentimentAPI
 import base64
 from wsgiref.simple_server import make_server
 
-alchemyapi = AlchemyAPI()
+senti_api = SentimentAPI()
 
 # Connect sns
 sns = boto.sns.connect_to_region(
@@ -47,9 +47,9 @@ def application(environ, start_response):
                 try:
                     message = domain['content']
                     mid = domain['id']
-                    alch_resp = alchemyapi.sentiment('text', message)
-                    logger.info("Received message: Sentiment: %s" % alch_resp["docSentiment"]["type"])
-                    sns.publish(topicarn, json.dumps({'id': mid, 'senti': alch_resp}))
+                    senti = senti_api.sentiment(message)
+                    logger.info("Received message: Sentiment: %s" % senti)
+                    sns.publish(topicarn, json.dumps({'id': mid, 'senti': senti}))
                 except Exception:
                     logger.warning('Error receiving data')
         except (TypeError, ValueError):
