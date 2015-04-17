@@ -46,10 +46,10 @@ def application(environ, start_response):
                 domain = json.loads(domain)
                 try:
                 	message = domain['content']
-                	mid = domain['id']
+                	# mid = domain['id']
                 	alch_resp = alchemyapi.sentiment('text', message)
                 	logger.info("Received message: Sentiment: %s" % alch_resp["docSentiment"]["type"])
-                    sns.publish(topicarn, json.dumps({'id': mid, 'senti': message}))
+                    # sns.publish(topicarn, json.dumps({'id': mid, 'senti': message}))
                 except Exception:
                 	logger.warning('Error receiving data')
         except (TypeError, ValueError):
