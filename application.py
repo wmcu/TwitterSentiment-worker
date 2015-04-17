@@ -14,7 +14,7 @@ sns = boto.sns.connect_to_region(
     "us-east-1",
     aws_access_key_id=cred_aws.aws_access_key_id,
     aws_secret_access_key=cred_aws.aws_secret_access_key)
-topicarn = r"arn:aws:sns:us-east-1:388167818195:twit-senti"
+topicarn = cred_aws.aws_sns_topicarn
 
 # Create logger
 logger = logging.getLogger(__name__)
